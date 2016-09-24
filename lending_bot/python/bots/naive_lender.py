@@ -11,7 +11,9 @@ WRITE_INTERVAL = 180
 FIELD_NAMES = ['currency', 'rate', 'amount', 'rangeMax', 'rangeMin']
 DEFAULT_LOAN = {'rate': 0.05, 'amount': 0, 'rangeMax': -1, 'rangeMin': -1}
 
-# TODO(pallarino): Need to catch key exception if there are no loan offers
+# TODO(pallarino): Should convert available amount into BTC value
+# TODO(pallarino): Get average price of bottom 1% of loan offers
+# TODO(pallarino): Write to new CSV file daily.
 
 class NaiveLender():
 	def __init__(self, polo):
@@ -23,7 +25,6 @@ class NaiveLender():
 
 	def run_indef(self):
 		while True:
-			print 'Awake!'
 			with open(OUTFILE, 'a') as csvfile:
 				writer = csv.DictWriter(csvfile, fieldnames=FIELD_NAMES, delimiter=',')
 				
@@ -52,9 +53,7 @@ class NaiveLender():
 					offer['rangeMax'] = lowest_offer['rangeMax']
 					offer['rangeMin'] = lowest_offer['rangeMin']
 
-					print 'Writing.'
 					writer.writerow(offer)
-			print 'Sleeping...'
 			time.sleep(WRITE_INTERVAL)
 		
 
