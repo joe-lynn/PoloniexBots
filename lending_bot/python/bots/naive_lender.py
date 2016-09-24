@@ -6,7 +6,7 @@ from api.poloniex_wrapper import poloniex
 from constants.api_key import API_KEY, SECRET_KEY
 from constants.poloniex_constants import LOAN_CURRENCIES
 
-OUTFILE = 'data/test.csv'
+OUTFILE = '../data/test.csv'
 WRITE_INTERVAL = 180
 FIELD_NAMES = ['currency', 'rate', 'amount', 'rangeMax', 'rangeMin']
 DEFAULT_LOAN = {'rate': 0.05, 'amount': 0, 'rangeMax': -1, 'rangeMin': -1}
